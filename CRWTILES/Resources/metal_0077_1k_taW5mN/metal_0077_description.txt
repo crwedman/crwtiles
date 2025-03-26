@@ -1,0 +1,10 @@
+Name:
+Rusty and Oxidized Metal Plate with Rivets (Metal 0077)
+
+Description:
+This metallic wall is made of numerous rusty and oxidized rectangular and square metal plates. Each plate is riveted by metal pins.
+
+Scratches and dirt can also be found on the surface.
+
+Author:
+https://www.texturecan.com

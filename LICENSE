@@ -1,0 +1,27 @@
+CRWTILES Library License
+
+Copyright (c) 2025 Christopher R. Wedman
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software (the "Library") to use, copy, modify, and incorporate it into
+their own projects, subject to the following conditions:
+
+1. The Library may only be redistributed as part of a larger project that
+integrates the Library as a dependency and includes substantial original content
+or functionality beyond the Library itself.
+
+2. Standalone redistribution of the Library, or any modified version thereof, is
+prohibited without prior written consent from Christopher R. Wedman.
+
+3. Any project incorporating the Library must retain this license and may not
+relicense the Library under different terms.
+
+4. The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Library.
+
+5. By submitting contributions to this Library, contributors grant the
+copyright holder the irrevocable right to use, modify, distribute, and relicense
+their contributions as part of the Library under any terms chosen by the
+copyright holder.
+
+THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.

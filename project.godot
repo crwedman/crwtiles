@@ -1,0 +1,183 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="CRWTILES"
+run/main_scene="uid://c5g3wglnwxwq3"
+config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://drp55duehfd2k"
+config/icon="uid://6thut1616y5g"
+config/windows_native_icon="res://CRWTILES/icon.ico"
+
+[dotnet]
+
+project/assembly_name="CRWTILES"
+
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="E:/videos/godot_movie.avi"
+movie_writer/fps=30
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/crwtiles/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+
+[importer_defaults]
+
+wavefront_obj={
+"force_disable_mesh_compression": true
+}
+scene={
+"meshes/force_disable_compression": true
+}
+
+[navigation]
+
+3d/default_cell_size=0.2
+3d/default_cell_height=0.2
+3d/default_edge_connection_margin=0.2
+
+[rendering]
+
+gl_compatibility/force_angle_on_devices=[{
+"name": "Radeon 9",
+"vendor": "ATI"
+}, {
+"name": "Radeon X",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 2",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 3",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 4",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 5",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 6",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 7",
+"vendor": "ATI"
+}, {
+"name": "Radeon HD 8",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R2 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R3 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R4 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R5 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R6 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R7 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon(TM) R7 Graphics",
+"vendor": "AMD"
+}, {
+"name": "Radeon(TM) R8 Graphics",
+"vendor": "AMD"
+}, {
+"name": "Radeon R5 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon R6 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon R7 Graphics",
+"vendor": "ATI"
+}, {
+"name": "Radeon R7 Graphics",
+"vendor": "AMD"
+}, {
+"name": "Radeon R8 Graphics",
+"vendor": "AMD"
+}, {
+"name": "Radeon R5 2",
+"vendor": "ATI"
+}, {
+"name": "Radeon R7 2",
+"vendor": "ATI"
+}, {
+"name": "Radeon R9 2",
+"vendor": "ATI"
+}, {
+"name": "Radeon R5 M2",
+"vendor": "ATI"
+}, {
+"name": "Radeon R7 M2",
+"vendor": "ATI"
+}, {
+"name": "Radeon R9 M2",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R9 Fury",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R5 3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R5 3",
+"vendor": "AMD"
+}, {
+"name": "Radeon (TM) R7 3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R7 3",
+"vendor": "AMD"
+}, {
+"name": "Radeon (TM) R9 3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R9 3",
+"vendor": "AMD"
+}, {
+"name": "Radeon (TM) R5 M3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R5 M3",
+"vendor": "AMD"
+}, {
+"name": "Radeon (TM) R7 M3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R7 M3",
+"vendor": "AMD"
+}, {
+"name": "Radeon (TM) R9 M3",
+"vendor": "ATI"
+}, {
+"name": "Radeon (TM) R9 M3",
+"vendor": "AMD"
+}, {
+"name": "Intel(R) HD Graphics 4000",
+"vendor": "Intel"
+}]
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
