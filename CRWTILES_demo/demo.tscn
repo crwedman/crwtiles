@@ -20,7 +20,7 @@ light_color = Color(0.98458, 0.971143, 0.99551, 1)
 light_energy = 0.8
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.948147, 0.130295, -0.289896, 0, 0.912107, 0.409952, 0.317831, -0.388695, 0.864812, -4.65339, 5.18782, 10.6144)
+transform = Transform3D(0.707107, 0.541675, -0.45452, 0, 0.642788, 0.766045, 0.707107, -0.541675, 0.45452, -8, 16, 11)
 script = ExtResource("1_bb73i")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]

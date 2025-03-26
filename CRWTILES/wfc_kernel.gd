@@ -9,7 +9,7 @@ const TileAtlasResource = CRWTILES_TileAtlasResource.TileAtlasResource
 
 var atlas: TileAtlasResource
 @export var max_retries = 3
-@export var max_failures = 1000
+@export var max_failures = 500
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _seed: int = 0
