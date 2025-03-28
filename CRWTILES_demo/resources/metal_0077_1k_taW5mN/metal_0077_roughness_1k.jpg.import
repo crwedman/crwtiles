@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq6iych303nw7"
-path="res://.godot/imported/metal_0077_color_1k.jpg-336411e8345ea2c8d8927a26e2d6c87b.ctex"
+uid="uid://bnqusywbsuy0h"
+path="res://.godot/imported/metal_0077_roughness_1k.jpg-0d7d7d18fc5fe992ac7fbb5b2004825a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CRWTILES/Resources/metal_0077_1k_taW5mN/metal_0077_color_1k.jpg"
-dest_files=["res://.godot/imported/metal_0077_color_1k.jpg-336411e8345ea2c8d8927a26e2d6c87b.ctex"]
+source_file="res://CRWTILES_demo/resources/metal_0077_1k_taW5mN/metal_0077_roughness_1k.jpg"
+dest_files=["res://.godot/imported/metal_0077_roughness_1k.jpg-0d7d7d18fc5fe992ac7fbb5b2004825a.ctex"]
 
 [params]
 
