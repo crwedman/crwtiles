@@ -4,7 +4,7 @@ const WFC = CRWTILES_WFC.WFC
 const Cell = WFC.Cell
 const TileAtlasResource = CRWTILES_TileAtlasResource.TileAtlasResource
 
-var tile_atlas: TileAtlasResource = load("res://blender/exports/crwtiles/tile_library.tres")
+var tile_atlas: TileAtlasResource = load("res://CRWTILES_demo/resources/exports/crwtiles/tile_library.tres")
 
 var pause = false
 var cell_nodes = {}

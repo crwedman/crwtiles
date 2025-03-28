@@ -38,3 +38,31 @@ func is_empty(my_face: int = -1):
 		return sockets.all(func(s: Socket): return s.edge_id == &"empty")
 	else:
 		return sockets[my_face].edge_id.begins_with(&"empty")
+
+static var empty: Tile:
+	get:
+		if not empty:
+			empty = Tile.new()
+			empty.tile_id = '_EMPTY_'
+			empty.name = "_EMPTY_"
+			empty.rotation_index = 0
+			empty.weight = 1.0
+
+			var empty_socket = Socket.empty
+			for i in range(6):
+				empty.sockets.append(empty_socket)
+		return empty
+
+static var solid: Tile:
+	get:
+		if not solid:
+			solid = Tile.new()
+			solid.tile_id = '_SOLID_'
+			solid.name = "_SOLID_"
+			solid.rotation_index = 0
+			solid.weight = 1.0
+
+			var solid_socket = Socket.solid
+			for i in range(6):
+				solid.sockets.append(solid_socket)
+		return solid

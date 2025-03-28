@@ -12,24 +12,9 @@ const Face = CRWTILES_Face.Face
 
 var import_button
 
-static var empty_tile: Tile
-static var solid_tile: Tile
 
 func _can_handle(object):
 	if object is TileAtlasResource:
-		if not empty_tile:
-			empty_tile = Tile.new()
-			empty_tile.tile_id = '_EMPTY_'
-			empty_tile.name = "_EMPTY_"
-			empty_tile.rotation_index = 0
-			empty_tile.entropy = 1.0
-
-			solid_tile = Tile.new()
-			solid_tile.tile_id = '_SOLID_'
-			solid_tile.name = "_SOLID_"
-			solid_tile.rotation_index = 0
-			solid_tile.entropy = 1.0
-
 		return true
 	return false
 
@@ -53,13 +38,13 @@ func import_scene(tile_atlas: TileAtlasResource):
 
 	var root = scene.instantiate()
 
-	var json_path: String = tile_atlas.scene_file.get_basename() + ".json"
-	#var json_path = tile_atlas.json_file
+	var json_path: String
 	if tile_atlas.scene_file.begins_with("uid://"):
 		var uid = ResourceLoader.get_resource_uid(tile_atlas.scene_file)
 		var real_path = ResourceUID.get_id_path(uid)
+		json_path = real_path.get_basename() + ".json"
+	else:
 		json_path = tile_atlas.scene_file.get_basename() + ".json"
-		#json_path = ResourceLoader.get_resource_uid(json_path)
 
 	print("JSON: %s" % [json_path])
 	var json_text = FileAccess.get_file_as_string(json_path)
@@ -84,18 +69,8 @@ func import_scene(tile_atlas: TileAtlasResource):
 				socket.set(p, data[p])
 		socket_index[id] = socket
 
-	if empty_tile.sockets.size() == 0:
-		var empty_socket = socket_index["empty"]
-		for i in range(6):
-			empty_tile.sockets.append(empty_socket)
-
-
-		var solid_socket = socket_index["solid"]
-		for i in range(6):
-			solid_tile.sockets.append(solid_socket)
-
-	tiles.append(solid_tile)
-	tiles.append(empty_tile)
+	tiles.append(Tile.solid)
+	tiles.append(Tile.empty)
 	for tile_info in json["tiles"]:
 		#print_debug("processing tile:\n", tile_info)
 		var mesh_name = tile_info["name"]
@@ -107,7 +82,7 @@ func import_scene(tile_atlas: TileAtlasResource):
 			tile.tile_id = tile_info["tile_id"]
 			tile.name = tile_info["name"]
 			tile.rotation_index = variant["rotation_index"]
-			tile.entropy = 1.0
+			tile.weight = 1.0
 			for id in variant["sockets"]:
 				tile.sockets.append(socket_index[id])
 			tiles.append(tile)
@@ -134,8 +109,8 @@ func import_scene(tile_atlas: TileAtlasResource):
 	tile_atlas.tiles = tiles
 	tile_atlas.mesh_index = mesh_index
 	tile_atlas.tile_grid = tile_grid
-	tile_atlas.solid_tile = solid_tile.duplicate(true)
-	tile_atlas.empty_tile = empty_tile.duplicate(true)
+	tile_atlas.solid_tile = Tile.solid
+	tile_atlas.empty_tile = Tile.empty
 
 	if OK != ResourceSaver.save(tile_atlas, tile_atlas.resource_path):
 		push_error("Failed to save ", tile_atlas.resource_path)
