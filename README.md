@@ -13,6 +13,7 @@ In **Blender**:
 1. Open `CRWTILES_demo/resources/tiles.blend`
     - *Note: I'm stuck at Blender 2.93.18, for now*
 2. Add the crwtiles Blender addon at `/blender/crwtiles`
+    - ZIP the crwtiles folder to install the addon (unless you are using a development server)
     - This will add a "3D Tile" tool for the 3D view
 3. Open the "3D Tile" tab:
     - Click "Generate Tiles"
