@@ -8,12 +8,16 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="CRWTILES"
 config/version="0.0.1"
 run/main_scene="uid://c5g3wglnwxwq3"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://drp55duehfd2k"
 config/icon="uid://6thut1616y5g"
 config/windows_native_icon="res://CRWTILES/icon.ico"
@@ -24,9 +28,9 @@ project/assembly_name="CRWTILES"
 
 [editor]
 
-movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="E:/videos/godot_movie.avi"
 movie_writer/fps=30
+movie_writer/mjpeg_quality=1.0
 
 [editor_plugins]
 

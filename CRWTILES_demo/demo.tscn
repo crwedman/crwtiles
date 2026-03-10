@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5g3wglnwxwq3"]
+[gd_scene load_steps=8 format=3 uid="uid://c5g3wglnwxwq3"]
 
 [ext_resource type="Script" uid="uid://d274g2ev2xhil" path="res://CRWTILES_demo/assetlib/free_look_camera.gd" id="1_bb73i"]
 [ext_resource type="Script" uid="uid://biysj6vrdyk8j" path="res://CRWTILES_demo/demo.gd" id="1_i7lqh"]
@@ -7,6 +7,20 @@
 fog_enabled = true
 fog_mode = 1
 fog_density = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2choq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqpv4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r48bt"]
+
+[sub_resource type="Theme" id="Theme_bqpv4"]
+TextEdit/colors/background_color = Color(1, 1, 1, 0)
+TextEdit/colors/font_color = Color(0, 0, 0, 1)
+TextEdit/colors/font_readonly_color = Color(0, 0, 0, 1)
+TextEdit/styles/focus = SubResource("StyleBoxEmpty_2choq")
+TextEdit/styles/normal = SubResource("StyleBoxEmpty_bqpv4")
+TextEdit/styles/read_only = SubResource("StyleBoxEmpty_r48bt")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_i7lqh")
@@ -28,3 +42,30 @@ omni_range = 20.0
 
 [node name="WFCRoot" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+offset_left = 7.0
+offset_top = 10.0
+offset_right = 266.0
+offset_bottom = 210.0
+theme = SubResource("Theme_bqpv4")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "WASD:  movement   
+R: Generate a new map
+E:  Move up
+Q:  Move down
+RMB:  Rotate the camera
+Mouse wheel: Movement speed
+SPACE:  Pause/Unpause"
+editable = false
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+empty_selection_clipboard_enabled = false
