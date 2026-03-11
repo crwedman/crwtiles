@@ -51,15 +51,15 @@ func import_scene(tile_atlas: TileAtlasResource):
 	print("Length:", json_text.length())
 	var json = JSON.parse_string(json_text)
 
-	var tiles = []
-	var socket_index = {}
-	var mesh_index = {}
-	var tile_index = {}
-	var tile_grid = {}
+	var tiles: Array[Tile] = []
+	var socket_index: Dictionary[String, Socket] = {}
+	var mesh_index: Dictionary[String, Mesh] = {}
+	var tile_index: Dictionary[String, Tile] = {}
+	var tile_grid: Dictionary[Vector3i, Tile] = {}
 	var tile_neighbors = {}
 
 	for id in json["sockets"]:
-		var socket = Socket.new()
+		var socket: Socket = Socket.new()
 		var data = json["sockets"][id]
 		for p in data:
 			if p == "edge_id" or p == "flipped_id":
@@ -73,12 +73,12 @@ func import_scene(tile_atlas: TileAtlasResource):
 	tiles.append(Tile.empty)
 	for tile_info in json["tiles"]:
 		#print_debug("processing tile:\n", tile_info)
-		var mesh_name = tile_info["name"]
-		var node = root.find_child(mesh_name)
+		var mesh_name: String = tile_info["name"]
+		var node: MeshInstance3D = root.find_child(mesh_name)
 		mesh_index[mesh_name] = node.mesh
 
 		for variant in tile_info["variants"]:
-			var tile = Tile.new()
+			var tile: Tile = Tile.new()
 			tile.tile_id = tile_info["tile_id"]
 			tile.name = tile_info["name"]
 			tile.rotation_index = variant["rotation_index"]
