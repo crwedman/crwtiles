@@ -280,6 +280,7 @@ func _propagate(observed_pos, rules) -> bool:
 
 	return true
 
+var _is_collapsing = false
 func collapse() -> Dictionary:
 	# Main loop to collapse the wave function
 	if _version_stack.size() == 0 and _cells.size() == 0:
@@ -287,7 +288,8 @@ func collapse() -> Dictionary:
 
 	var observed = [null]
 	var success = true
-	while true:
+	_is_collapsing = true
+	while _is_collapsing:
 		if _is_paused:
 			_pause()
 
@@ -323,6 +325,7 @@ func collapse() -> Dictionary:
 					_restore()
 				_fail_count = 0
 
+	_is_collapsing = false
 	if observed[0] == null and len(_uncollapsed) == 0:
 		success = true
 

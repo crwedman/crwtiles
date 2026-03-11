@@ -49,6 +49,12 @@ func _input(event: InputEvent):
 		if KEY_R == event.keycode and not event.pressed:
 			if not is_running:
 				go()
+			else:
+				if wf._is_paused:
+					wf._is_paused = false
+					wf.resume_semaphore.post()
+				wf._is_collapsing = false
+				go.call_deferred()
 
 func _process(_delta):
 	if wf_thread:
