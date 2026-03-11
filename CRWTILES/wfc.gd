@@ -124,16 +124,24 @@ func _post_propagate(observed_pos):
 	var to_update = _propagated.keys()
 	for pos in to_update:
 		var cell = at(pos)
+		if null == cell:
+			continue
 		for face in Face.FACES:
-			if cell.is_passable(face):
-				_propagated_set.union(pos, offset(pos, face))
+			var neighbor_pos = offset(pos, face)
+			if cell.is_passable(face) and exists_at(neighbor_pos):
+				var neighbor = at(neighbor_pos)
+				if neighbor and neighbor.is_passable(Face.OPPOSITE[face]):
+					_propagated_set.union(pos, neighbor_pos)
 			if _cap_ends:
 				cap_ends(cell, pos, face)
 
 	var tile: Tile = at(observed_pos).tiles[0]
 	for face in Face.FACES:
-		if not tile.is_solid():
-			_propagated_set.union(observed_pos, observed_pos + Face.OFFSETS[face])
+		var neighbor_pos = observed_pos + Face.OFFSETS[face]
+		if not tile.is_solid(face) and exists_at(neighbor_pos):
+			var neighbor = at(neighbor_pos)
+			if neighbor and neighbor.is_passable(Face.OPPOSITE[face]):
+				_propagated_set.union(observed_pos, neighbor_pos)
 
 	if _root_pos != null:
 		var root = _propagated_set.find(_root_pos)
@@ -154,8 +162,11 @@ func _post_propagate(observed_pos):
 
 		# finally, update the collapsed cell
 		for face in Face.FACES:
-			if not tile.is_solid(face):
-				_reachable_set.union(observed_pos, observed_pos + Face.OFFSETS[face])
+			var neighbor_pos = observed_pos + Face.OFFSETS[face]
+			if not tile.is_solid(face) and exists_at(neighbor_pos):
+				var neighbor = at(neighbor_pos)
+				if neighbor and neighbor.is_passable(Face.OPPOSITE[face]):
+					_reachable_set.union(observed_pos, neighbor_pos)
 
 	if null == _root_pos:
 		_root_pos = observed_pos
