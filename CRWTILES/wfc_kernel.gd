@@ -62,7 +62,7 @@ func _restore() -> bool:
 	_uncollapsed = previous.pop_back()
 	_cells = previous.pop_back()
 
-	_post_update(curr_cells)
+	_post_restore(curr_cells.keys())
 
 	return true
 
@@ -84,7 +84,30 @@ func get_all_updates() -> Dictionary:
 func _post_update(cells):
 	_updates_mutex.lock()
 	for pos in cells:
-		var cell = Cell.new(cells[pos].tiles)
+		var source = cells[pos]
+		if source == null:
+			_info[pos] = null
+			continue
+
+		var cell = Cell.new(source.tiles)
+		_info[pos] = cell
+	_updates_mutex.unlock()
+
+	if _step_by_step:
+		updates_semaphore.post()
+		resume_semaphore.wait()
+	else:
+		updates_semaphore.post()
+
+func _post_restore(positions):
+	_updates_mutex.lock()
+	for pos in positions:
+		var source = at(pos)
+		if source == null:
+			_info[pos] = null
+			continue
+
+		var cell = Cell.new(source.tiles)
 		_info[pos] = cell
 	_updates_mutex.unlock()
 
