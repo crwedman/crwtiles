@@ -3,7 +3,7 @@ extends CRWTILES_WFCKernel
 const WFC = CRWTILES_WFC
 const MinimumPassageRule = preload("res://CRWTILES/rules/minimum_passage_rule.gd")
 
-@export var growth_limit: int = 100
+@export var growth_limit: int = 200
 @export var enforce_minimum_passage_rule := true
 @export_range(1, 4, 1) var minimum_passage_width := 2
 
@@ -137,6 +137,65 @@ func _build_open_components(collapsed_open: Dictionary) -> Dictionary:
 
 	return component_openings
 
+func _collect_root_reachable_cells() -> Dictionary:
+	var reachable = {}
+	if null == _root_pos or not exists_at(_root_pos):
+		return reachable
+
+	var root_cell = at(_root_pos)
+	if null == root_cell:
+		return reachable
+
+	var queue = [_root_pos]
+	reachable[_root_pos] = true
+
+	var current = 0
+	while current < queue.size():
+		var pos: Vector3i = queue[current]
+		current += 1
+
+		var cell = at(pos)
+		if null == cell:
+			continue
+
+		for face in Face.FACES:
+			if not cell.is_passable(face):
+				continue
+
+			var neighbor_pos = offset(pos, face)
+			var neighbor = at(neighbor_pos)
+			if null == neighbor or not neighbor.is_passable(Face.OPPOSITE[face]):
+				continue
+			if reachable.has(neighbor_pos):
+				continue
+
+			reachable[neighbor_pos] = true
+			queue.push_back(neighbor_pos)
+
+	return reachable
+
+func _prune_disconnected_cells() -> int:
+	var reachable = _collect_root_reachable_cells()
+	if reachable.is_empty():
+		return 0
+
+	var removed = {}
+	for pos in _all_positions().keys():
+		if reachable.has(pos) or not exists_at(pos):
+			continue
+
+		remove(pos)
+		removed[pos] = null
+
+	if not removed.is_empty():
+		_post_update(removed)
+
+	return removed.size()
+
+func _commit_pruned_state() -> void:
+	_flatten_search_state()
+	_reachable_stack.clear()
+
 func fuzz_tiles(cell: Cell, _pos: Vector3i, _face: int) -> bool:
 	cell._randomize_tiles(_rng)
 	return true
@@ -257,6 +316,24 @@ func _post_propagate(observed_pos):
 			disconnected_components[component] = true
 
 	if _cap_ends:
+		if disconnected_components.size() > 0:
+			var pruned_count = _prune_disconnected_cells()
+			if pruned_count > 0:
+				print("pruned disconnected:%s world:%s" % [pruned_count, _world_size])
+				_cap_ends = false
+				_propagated_set = DisjointSet.new()
+				collapsed_open = _collapsed_open_cells()
+				if collapsed_open.is_empty():
+					_reachable_set = DisjointSet.new()
+					_root_pos = null
+				else:
+					if not collapsed_open.has(_root_pos):
+						_root_pos = collapsed_open.keys()[0]
+					_build_open_components(collapsed_open)
+					_reachable_set = _propagated_set.duplicate()
+				_commit_pruned_state()
+				return true
+
 		for component in disconnected_components.keys():
 			if component_openings.get(component, 0) == 0:
 				print("sealed disconnected component:%s" % [component])

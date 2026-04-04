@@ -159,30 +159,61 @@ func remove(pos):
 		_world_size -= 1
 		#_cells.erase(pos)
 	_cells[pos] = null
-	_uncollapsed[pos] = false
+	_uncollapsed.erase(pos)
 
 
 func at(pos: Vector3i) -> Cell:
-	var cell = _cells.get(pos)
-	if null == cell:
-		var index = _version_stack.size();
-		while index > 0:
-			index -= 1
-			if _version_stack[index][CELLS_VERSIONSTACK_INDEX].has(pos):
-				cell = _version_stack[index][CELLS_VERSIONSTACK_INDEX].get(pos)
-				if cell != null: break
-	return cell
+	if _cells.has(pos):
+		return _cells.get(pos)
 
-func exists_at(pos: Vector3i) -> bool:
-	if _cells.get(pos):
-		return true
-	var index = _version_stack.size();
+	var index = _version_stack.size()
 	while index > 0:
 		index -= 1
-		if _version_stack[index][CELLS_VERSIONSTACK_INDEX].has(pos):
-			if _version_stack[index][CELLS_VERSIONSTACK_INDEX].get(pos) != null:
-				return true
+		var frame_cells: Dictionary = _version_stack[index][CELLS_VERSIONSTACK_INDEX]
+		if frame_cells.has(pos):
+			return frame_cells.get(pos)
+
+	return null
+
+func exists_at(pos: Vector3i) -> bool:
+	if _cells.has(pos):
+		return _cells.get(pos) != null
+
+	var index = _version_stack.size()
+	while index > 0:
+		index -= 1
+		var frame_cells: Dictionary = _version_stack[index][CELLS_VERSIONSTACK_INDEX]
+		if frame_cells.has(pos):
+			return frame_cells.get(pos) != null
+
 	return false
+
+func _flatten_search_state() -> void:
+	var positions: Dictionary[Vector3i, bool] = {}
+	for pos in _cells.keys():
+		positions[pos] = true
+
+	for frame in _version_stack:
+		var frame_cells: Dictionary = frame[CELLS_VERSIONSTACK_INDEX]
+		for pos in frame_cells.keys():
+			positions[pos] = true
+
+	var flattened_cells: Dictionary[Vector3i, Cell] = {}
+	var flattened_uncollapsed: Dictionary[Vector3i, bool] = {}
+	for pos in positions.keys():
+		var cell = at(pos)
+		if cell == null:
+			continue
+
+		flattened_cells[pos] = cell
+		if not cell.is_collapsed():
+			flattened_uncollapsed[pos] = true
+
+	_cells = flattened_cells
+	_uncollapsed = flattened_uncollapsed
+	_world_size = flattened_cells.size()
+	_version_stack.clear()
+	_retries = 1
 
 func offset(pos: Vector3i, face: int) -> Vector3i: return pos + Face.OFFSETS[face]
 
@@ -347,6 +378,9 @@ func collapse() -> Dictionary:
 
 	if success: for pos in _cells.keys():
 		var cell = _cells[pos]
+		if cell == null:
+			_cells.erase(pos)
+			continue
 		if cell.tiles[0].name == atlas.solid_tile.name:
 			_cells.erase(pos)
 			continue
