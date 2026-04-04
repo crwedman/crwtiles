@@ -1,8 +1,14 @@
 class_name CRWTILES_WFC
 extends CRWTILES_WFCKernel
 const WFC = CRWTILES_WFC
+const MinimumPassageRule = preload("res://CRWTILES/rules/minimum_passage_rule.gd")
 
 @export var growth_limit: int = 100
+@export var enforce_minimum_passage_rule := true
+@export_range(1, 4, 1) var minimum_passage_width := 2
+
+@export var observe_rules: Array[CRWTILES_Rule] = []
+@export var propagate_rules: Array[CRWTILES_Rule] = []
 
 const DisjointSet = CRWTILES_DisjointSet.DisjointSet
 var _reachable_set: DisjointSet = DisjointSet.new()
@@ -11,14 +17,26 @@ var _propagated = {}
 var _root_pos
 var _reachable_stack = []
 var _cap_ends = false
+var _minimum_passage_rule = MinimumPassageRule.new(self )
+
+func _get_modular_rules() -> Array:
+	if not enforce_minimum_passage_rule:
+		return []
+
+	_minimum_passage_rule.minimum_width = minimum_passage_width
+	return [
+		_minimum_passage_rule.observe,
+	]
 
 func _get_observe_rules():
-	return [
+	var rules = [
 		expand.bind(1),
 		cap_ends,
 		match_edges.bind(true),
-		fuzz_tiles,
 	]
+	rules.append_array(_get_modular_rules())
+	rules.append(fuzz_tiles)
+	return rules
 
 func _get_propagate_rules():
 	return [
