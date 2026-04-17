@@ -1,7 +1,7 @@
 class_name CRWTILES_WFC
 extends CRWTILES_WFCKernel
 const WFC = CRWTILES_WFC
-const MinimumPassageRule = preload("res://CRWTILES/rules/minimum_passage_rule.gd")
+const MinimumPassageRule = preload("res://addons/crwtiles/CRWTILES/rules/minimum_passage_rule.gd")
 
 @export var growth_limit: int = 200
 @export var enforce_minimum_passage_rule := true

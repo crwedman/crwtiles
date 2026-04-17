@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c885ril7l5nck"]
+[gd_scene format=3 uid="uid://c885ril7l5nck"]
 
 [ext_resource type="Script" uid="uid://bdxql23x7xxdu" path="res://addons/crwtiles/wfc_visualizer.gd" id="1_rgjqi"]
-[ext_resource type="Script" uid="uid://d274g2ev2xhil" path="res://CRWTILES_demo/assetlib/free_look_camera.gd" id="2_7o2yd"]
+[ext_resource type="Script" uid="uid://d274g2ev2xhil" path="res://addons/crwtiles/CRWTILES_demo/assetlib/free_look_camera.gd" id="2_7o2yd"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_rgjqi")

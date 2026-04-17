@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5g3wglnwxwq3"]
+[gd_scene format=3 uid="uid://c5g3wglnwxwq3"]
 
-[ext_resource type="Script" uid="uid://d274g2ev2xhil" path="res://CRWTILES_demo/assetlib/free_look_camera.gd" id="1_bb73i"]
-[ext_resource type="Script" uid="uid://biysj6vrdyk8j" path="res://CRWTILES_demo/demo.gd" id="1_i7lqh"]
+[ext_resource type="Script" uid="uid://d274g2ev2xhil" path="res://addons/crwtiles/CRWTILES_demo/assetlib/free_look_camera.gd" id="1_bb73i"]
+[ext_resource type="Script" uid="uid://biysj6vrdyk8j" path="res://addons/crwtiles/CRWTILES_demo/demo.gd" id="1_i7lqh"]
 
 [sub_resource type="Environment" id="Environment_tlwt5"]
 fog_enabled = true
@@ -22,30 +22,30 @@ TextEdit/styles/focus = SubResource("StyleBoxEmpty_2choq")
 TextEdit/styles/normal = SubResource("StyleBoxEmpty_bqpv4")
 TextEdit/styles/read_only = SubResource("StyleBoxEmpty_r48bt")
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" unique_id=303545145]
 script = ExtResource("1_i7lqh")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1418034575]
 environment = SubResource("Environment_tlwt5")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1338997566]
 transform = Transform3D(0.5, 0.433013, -0.75, 0, 0.866025, 0.5, 0.866025, -0.25, 0.433013, -16, 12, 18)
 light_color = Color(0.98458, 0.971143, 0.99551, 1)
 light_energy = 0.8
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=491233250]
 transform = Transform3D(0.707107, 0.541675, -0.45452, 0, 0.642788, 0.766045, 0.707107, -0.541675, 0.45452, -8, 16, 11)
 script = ExtResource("1_bb73i")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Camera3D" unique_id=772703778]
 omni_range = 20.0
 
-[node name="WFCRoot" type="Node3D" parent="."]
+[node name="WFCRoot" type="Node3D" parent="." unique_id=364628044]
 unique_name_in_owner = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1266425090]
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer"]
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer" unique_id=1572785653]
 offset_left = 7.0
 offset_top = 10.0
 offset_right = 266.0
@@ -66,6 +66,6 @@ shortcut_keys_enabled = false
 selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
-virtual_keyboard_enabled = false
 middle_mouse_paste_enabled = false
 empty_selection_clipboard_enabled = false
+virtual_keyboard_enabled = false

@@ -20,7 +20,7 @@ run/main_scene="uid://c5g3wglnwxwq3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://drp55duehfd2k"
 config/icon="uid://6thut1616y5g"
-config/windows_native_icon="res://CRWTILES/icon.ico"
+config/windows_native_icon="res://addons/crwtiles/CRWTILES/icon.ico"
 
 [dotnet]
 

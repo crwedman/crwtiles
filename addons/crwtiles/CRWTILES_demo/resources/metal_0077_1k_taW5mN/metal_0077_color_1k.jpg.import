@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq6iych303nw7"
-path="res://.godot/imported/metal_0077_color_1k.jpg-ed7fcd2322f0acf6d381acb7d96afcf7.ctex"
+path="res://.godot/imported/metal_0077_color_1k.jpg-8b646082476fcf7a40a4878ffdb50487.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CRWTILES_demo/resources/metal_0077_1k_taW5mN/metal_0077_color_1k.jpg"
-dest_files=["res://.godot/imported/metal_0077_color_1k.jpg-ed7fcd2322f0acf6d381acb7d96afcf7.ctex"]
+source_file="res://addons/crwtiles/CRWTILES_demo/resources/metal_0077_1k_taW5mN/metal_0077_color_1k.jpg"
+dest_files=["res://.godot/imported/metal_0077_color_1k.jpg-8b646082476fcf7a40a4878ffdb50487.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
