@@ -3,7 +3,7 @@
 - Use Blender to cut a scene into 3D tiles
 - Import into Godot to generate 3D maps
 
-![Logo](CRWTILES/logo.png)
+![Logo](addons/crwtiles/CRWTILES/logo.png)
 
 ## Exporting from Blender, Importing to Godot
 
